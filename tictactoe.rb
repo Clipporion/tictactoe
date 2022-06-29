@@ -9,8 +9,7 @@ class Game
         @ended = false
     end
 
-    attr_accessor :field, :free, :first_player, :ended
-    attr_accessor :winning_lines
+    attr_accessor :field, :free, :first_player, :ended, :winning_lines
 
     def print_board
         puts "  #{field[1]}  |  #{field[2]}  |  #{field[3]}"
@@ -40,6 +39,7 @@ class Player
     end
 
     attr_reader :name, :symbol
+    attr_accessor :number
 
     def choose_field
         $game.print_board
@@ -77,6 +77,11 @@ class Player
                 $game.print_board
                 puts "#{@name} is the winner, congratulations"
                 $game.ended = true
+                puts "Do you want to play again? (Y or N)"
+                if gets.chomp == "Y"
+                    @@number = 1
+                    play_game
+                end
             end
         end
     end
